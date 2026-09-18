@@ -14,7 +14,7 @@ def request_url_value(IP: str, plugin:str) -> str:
 
 def main():
     print("Hello from restapi-py!")
-    hosts = ["192.168.1.42", "192.168.1.65", "192.168.1.139", "192.168.1.19", "192.168.1.106", "192.168.1.247"]
+    hosts = ["192.168.1.42", "192.168.1.65", "192.168.1.139", "192.168.1.19", "192.168.1.106", "192.168.1.247", "192.168.1.182"]
     plugins = ["cpu", "system", "sensors", "load", "mem", "network", "uptime"]
     data = ["system/hostname", "cpu/total", "mem/percent", "sensors/value"]
 
