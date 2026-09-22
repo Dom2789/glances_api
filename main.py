@@ -4,12 +4,13 @@ from src.data import Data
 
 def request_url(IP: str, plugin:str) -> str:
     url = f"http://{IP}:61208/api/4/{plugin}"
-    response = requests.get(url)
+    response = requests.get(url, timeout=(3, 30))
     return response.json()
 
 def request_url_value(IP: str, plugin:str) -> str:
     url = f"http://{IP}:61208/api/4/{plugin}"
-    response = requests.get(url)
+    # timeout for connect 3 seconds for read 30 seconds
+    response = requests.get(url, timeout=(3, 30))
     return json.loads(response.text)
 
 def main():
@@ -23,8 +24,13 @@ def main():
         print(f"---------{host}---------")
         try:
             print(f"{request_url(host, "status")}")
-        except requests.exceptions.ConnectionError:
+        except requests.exceptions.Timeout:
+            print(f"Timeout")
+            print()
+            continue
+        except requests.exceptions.ConnectionError as e:
             print(f"not available")
+            print(e)
             print()
             continue
         temp_data = []
